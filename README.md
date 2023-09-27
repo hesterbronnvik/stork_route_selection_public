@@ -7,11 +7,17 @@ Migration can be a risky and an energetically costly behavior with strong fitnes
 
 # Contents:
 This repository consists of the R scripts:
+
 01_data_location.R: accesses, cleans, and segments the data that we used for our analyses.
+
 02_step_generation.R: provides the script necessary for generating alternative steps for step-selection analysis (adapted from Nourani et al. 2021 https://github.com/mahle68/global_seascape_public/blob/main/step_generation.R)
+
 03_uplift_annotation.R: downloads ECMWF ERA-5 data and annotates the stork locations with the convective velocity scale.
+
 04_utilization_distribution_estimation.R: builds auto-correlated kernel density estimates for each hour of the tracking data and annotates the stork locations with utilization distribution probability density.
+
 05_step_selection_analysis.R: uses the data generated in the previous scripts to run the step selection analyses.
+
 06_plotting_WS.R: plots exploratory and results figures from the paper and supplement.
 
 All input data are available on Movebank.org
