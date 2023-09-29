@@ -165,7 +165,7 @@ data_ls <- split(a_data, year(a_data$timestamp))
 
 # loop through each year and annotate it with its environmental data
 (start_time <- Sys.time())
-annotated_data <- lapply(data_ls[[11]], function(steps){
+annotated_data <- lapply(data_ls, function(steps){
   # identify the year and hours
   d_year <- unique(year(steps$timestamp))
   stamp <- round_date(unique(steps$timestamp), unit = "hour")
