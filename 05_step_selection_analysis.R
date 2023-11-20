@@ -66,6 +66,36 @@ a_data %>%
   dplyr::select(c(ud_pdf, w_star, step_length, turning_angle, migrations)) %>% 
   correlate() # w* and conspecific density = 0.0169
 
+# run Kolmogorov-Smirnov tests to see how the environmental variables are distributed in each migration
+k_data <- a_data %>% 
+  group_by(stratum) %>% 
+  mutate(strat_var_w = var(w_star),
+         strat_var_s = var(ud_pdf)) %>% 
+  slice(1) %>% 
+  ungroup() %>% 
+  mutate(group = paste(season, migrations, sep = "_"))
+
+k_data_ls <- split(k_data, k_data$group)
+ks_stats <- lapply(k_data_ls, function(k){
+  variable <- lapply(c("strat_var_w", "strat_var_s"), function(v){
+    # generalze the name for the group of interest
+    vk <- k %>% 
+      rename("variable" = all_of(v))
+    # take all the other data in the right season but other migrations
+    au <- k_data %>% 
+      rename("variable" = all_of(v)) %>% 
+      filter(group != unique(vk$group) & season == unique(vk$season))
+    output <- data.frame(season = unique(vk$season),
+                         migration = unique(vk$migrations),
+                         variable = v,
+                         t_stat = round(ks.test(vk$variable, au$variable)[[1]], 3),
+                         p_val = format(round(ks.test(vk$variable, au$variable)[[2]], 4), scientific = F))
+    return(output)
+  }) %>% reduce(rbind)
+  return(variable)
+}) %>% reduce(rbind) %>% 
+  arrange(variable)
+
 # STEP 1: run the model ------------------------------------------------------------------ 
 #this is based on Muff et al:
 #https://conservancy.umn.edu/bitstream/handle/11299/204737/Otters_SSF.html?sequence=40&isAllowed=y#glmmtmb-1
