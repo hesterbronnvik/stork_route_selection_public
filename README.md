@@ -20,4 +20,8 @@ This repository consists of the R scripts:
 
 06_plotting_WS.R: plots exploratory and results figures from the paper and supplement.
 
+how_to_estimate_uplift.pdf: a complete guide to estimating the convective velocity scale, w*, using R and ECMWF Reanalysis ERA5 data.
+
+supplemental_wind_support_analysis.pdf: runs the step selection models including wind support as a predictor, which is non-significant.
+
 All input data are available on Movebank.org
