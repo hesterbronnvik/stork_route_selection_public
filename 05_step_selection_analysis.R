@@ -228,7 +228,7 @@ lapply(split(a_data, a_data$season), function(data){
            sqrt_ud_z = (sqrt_ud - mean(a_data$sqrt_ud))/(sd(a_data$sqrt_ud)),
            migrations_z = (migrations - mean(a_data$migrations))/(sd(a_data$migrations)),
            step_length_z = (step_length - mean(a_data$step_length, na.rm = T))/(sd(a_data$step_length, na.rm = T)), 
-           turning_angle_z = (step_length - mean(a_data$turning_angle, na.rm = T))/(sd(a_data$turning_angle, na.rm = T)))
+           turning_angle_z = (turning_angle - mean(a_data$turning_angle, na.rm = T))/(sd(a_data$turning_angle, na.rm = T)))
   
   new_data <- prep_d %>% 
     mutate(interaction = "OG_data") %>% 
